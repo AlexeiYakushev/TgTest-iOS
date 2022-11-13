@@ -21,6 +21,7 @@ import FetchManagerImpl
 import InAppPurchaseManager
 import AnimationCache
 import MultiAnimationRenderer
+import Custom
 
 private final class DeviceSpecificContactImportContext {
     let disposable = MetaDisposable()
@@ -116,6 +117,7 @@ public final class AccountContextImpl: AccountContext {
     
     public let fetchManager: FetchManager
     public let prefetchManager: PrefetchManager?
+	public let fetchAPIManager: FetchAPIManager
     
     public var keyShortcutsController: KeyShortcutsController?
     
@@ -187,6 +189,7 @@ public final class AccountContextImpl: AccountContext {
             self.liveLocationManager = nil
         }
         self.fetchManager = FetchManagerImpl(postbox: account.postbox, storeManager: self.downloadedMediaStoreManager)
+		self.fetchAPIManager = FetchAPIManagerImpl(service: AccountServiceImpl.shared)
         if sharedContext.applicationBindings.isMainApp && !temp {
             self.prefetchManager = PrefetchManagerImpl(sharedContext: sharedContext, account: account, engine: self.engine, fetchManager: self.fetchManager)
             self.wallpaperUploadManager = WallpaperUploadManagerImpl(sharedContext: sharedContext, account: account, presentationData: sharedContext.presentationData)

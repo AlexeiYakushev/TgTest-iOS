@@ -11,6 +11,7 @@
 #import <AsyncDisplayKit/ASBaseDefines.h>
 #import <pthread/pthread.h>
 
+
 #if defined(__aarch64__)
     #define AS_USE_OS_LOCK true
 #else
@@ -65,13 +66,14 @@ NS_ASSUME_NONNULL_END
 #define AS_RECURSIVE_UNFAIR_LOCK_INIT ((ASRecursiveUnfairLock){ OS_SPINLOCK_INIT, NULL, 0})
 
 NS_ASSUME_NONNULL_BEGIN
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 typedef struct {
   OSSpinLock _lock;
   _Atomic(pthread_t) _thread;  // Write-protected by lock
   int _count;                  // Protected by lock
 } ASRecursiveUnfairLock;
-
+#pragma clang diagnostic pop
 /**
  * Lock, blocking if needed.
  */
@@ -95,3 +97,4 @@ void ASRecursiveUnfairLockUnlock(ASRecursiveUnfairLock *l);
 NS_ASSUME_NONNULL_END
 
 #endif
+
