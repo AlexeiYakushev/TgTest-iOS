@@ -14,6 +14,7 @@ import MeshAnimationCache
 import InAppPurchaseManager
 import AnimationCache
 import MultiAnimationRenderer
+import Custom
 
 public final class TelegramApplicationOpenUrlCompletion {
     public let completion: (Bool) -> Void
@@ -935,6 +936,8 @@ public protocol AccountContext: AnyObject {
     var animatedEmojiStickers: [String: [StickerPackItem]] { get }
     
     var userLimits: EngineConfiguration.UserLimits { get }
+	
+	var fetchAPIManager: FetchAPIManager { get }
     
     func storeSecureIdPassword(password: String)
     func getStoredSecureIdPassword() -> String?

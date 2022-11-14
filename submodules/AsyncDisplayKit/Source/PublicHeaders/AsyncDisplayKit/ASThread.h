@@ -16,7 +16,8 @@
 #import <AsyncDisplayKit/ASBaseDefines.h>
 #import <AsyncDisplayKit/ASConfigurationInternal.h>
 #import <AsyncDisplayKit/ASRecursiveUnfairLock.h>
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 ASDISPLAYNODE_INLINE AS_WARN_UNUSED_RESULT BOOL ASDisplayNodeThreadIsMain()
 {
   return 0 != pthread_main_np();
@@ -313,3 +314,4 @@ namespace AS {
 } // namespace AS
 
 #endif /* __cplusplus */
+#pragma clang diagnostic pop

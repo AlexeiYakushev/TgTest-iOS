@@ -23,7 +23,8 @@
  */
 #define rul_set_thread(l, t) atomic_store_explicit(&l->_thread, t, memory_order_release)
 #define rul_get_thread(l) atomic_load_explicit(&l->_thread, memory_order_acquire)
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 void ASRecursiveUnfairLockLock(ASRecursiveUnfairLock *l)
 {
   // Try to lock without blocking. If we fail, check what thread owns it.
@@ -112,3 +113,4 @@ void ASRecursiveUnfairLockUnlock(ASRecursiveUnfairLock *l)
 #endif
   }
 }
+#pragma clang diagnostic pop
